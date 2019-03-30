@@ -3,7 +3,7 @@
 const routes =  require('express').Router();
 
 routes.get('/', (req, res) => {
-    res.send("Hello World");
+    res.send("Hello Worl");
 });
 
 module.exports = routes;
