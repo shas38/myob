@@ -21,11 +21,5 @@ pipeline {
          sh 'npm test'
       }
     }      
-    stage('Run') {
-        steps {
-            echo 'Starting application...'
-            sh 'npm start'
-        }
-    }
   }
 }
