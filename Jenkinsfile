@@ -1,6 +1,9 @@
 pipeline {
+    environment {
+        registry = "shahriar27/myob"
+        registryCredential = "dockerHubCredentials"
+    }
     agent any
-    def app
     stages {
         stage('Cloning Git') {
             steps {
@@ -22,7 +25,8 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t shk/myob .'
+                // sh 'docker build -t shk/myob .'
+                docker.build registry + ":$BUILD_NUMBER"
             }
         }   
 
@@ -33,10 +37,11 @@ pipeline {
         //     }
         // }  
 
-        stage('Publish') {
-            steps {
-                sh 'docker push shk/myob shahriar27/myob:tagname'            
-            }
-        }
+        // stage('Publish') {
+
+        //     steps {
+        //         sh 'docker push shk/myob shahriar27/myob:tagname'            
+        //     }
+        // }
     }
 }
