@@ -38,5 +38,5 @@ The pipeline can be seen in the image below.
 
 ## How to pull the docker image
 1. Make sure docker is installed on your machine.
-2. To pull the docker image run "docker pull shahriar27/myob:latest"
+2. To pull the docker image run "docker pull shahriar27/myob:stable"
 3. To run the docker container in the background type "docker run -p 3000:3000 -d shahriar27/myob"
