@@ -55,22 +55,20 @@ pipeline {
                 script {
                     // docker.build registry + ":$BUILD_NUMBER"
                     def customImage = docker.build("$registry:$BUILD_NUMBER")
-                    docker.withRegistry( '', 'dockerHubCredentials' ) {
-                        customImage.push('latest')
-                    }
+
                 }
             }
         } 
 
-        // stage('Deploy Docker Image') {
-        //     steps{
-        //         script {
-        //             docker.withRegistry( 'https://hub.docker.com', 'dockerHubCredentials' ) {
-        //                 dockerImage.push("latest")
-        //             }
-        //         }
-        //     }
-        // }   
+        stage('Deploy Docker Image') {
+            steps{
+                script {
+                    docker.withRegistry( '', 'dockerHubCredentials' ) {
+                        customImage.push("${env.BUILD_NUMBER}")
+                    }
+                }
+            }
+        }   
 
 
         // stage('Remove Unused docker image') {
