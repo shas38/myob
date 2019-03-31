@@ -1,18 +1,36 @@
 pipeline {
     agent any
     stages {
-        stage('Example Build') {
+        stage('Cloning Git') {
             steps {
-                echo 'Hello World'
+                git 'https://github.com/shas38/myob.git'
             }
         }
-        stage('Example Deploy') {
-            when {
-                triggeredBy "TimerTrigger"
-            }
+
+        stage('Install dependencies') {
             steps {
-                echo 'Deploying'
+                sh 'npm install'
             }
         }
+
+        stage('Unit Test') {
+            steps {
+                sh 'npm test'
+            }
+        } 
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t shk/myob .'
+            }
+        }  
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker run -p 4000:3000 -d shk/myob'
+                sh 'curl http://localhost:4000/health'    
+            }
+        }   
+
     }
 }
