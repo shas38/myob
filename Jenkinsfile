@@ -26,29 +26,60 @@ pipeline {
         } 
 
 
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    dockerImage = docker.build("$registry:$BUILD_NUMBER")
-                }
-            }
-        } 
+        // stage('Build Docker Image') {
+        //     steps {
+        //         script {
+        //             dockerImage = docker.build("$registry:$BUILD_NUMBER")
+        //         }
+        //     }
+        // } 
 
-        stage('Deploy Docker Image') {
-            steps{
-                script {
-                    docker.withRegistry( '', 'dockerHubCredentials' ) {
-                        dockerImage.push("${env.BUILD_NUMBER}")
-                        dockerImage.push("latest")
+        // stage('Deploy Docker Image') {
+        //     steps{
+        //         script {
+        //             docker.withRegistry( '', 'dockerHubCredentials' ) {
+        //                 dockerImage.push("${env.BUILD_NUMBER}")
+        //                 dockerImage.push("latest")
+        //             }
+        //         }
+        //     }
+        // }   
+
+
+        // stage('Remove Unused docker image') {
+        //     steps{
+        //         sh "docker rmi $registry:$BUILD_NUMBER"
+        //     }
+        // }
+
+        node {
+            script {
+                def app
+            }
+            stage('Build Docker Image') {
+                steps {
+                    script {
+                        app = docker.build("$registry:$BUILD_NUMBER")
                     }
                 }
-            }
-        }   
+            } 
+
+            stage('Deploy Docker Image') {
+                steps{
+                    script {
+                        docker.withRegistry( '', 'dockerHubCredentials' ) {
+                            app.push("${env.BUILD_NUMBER}")
+                            app.push("latest")
+                        }
+                    }
+                }
+            }   
 
 
-        stage('Remove Unused docker image') {
-            steps{
-                sh "docker rmi $registry:$BUILD_NUMBER"
+            stage('Remove Unused docker image') {
+                steps{
+                    sh "docker rmi $registry:$BUILD_NUMBER"
+                }
             }
         }
 
