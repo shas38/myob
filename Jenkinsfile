@@ -1,3 +1,6 @@
+import jenkins.model.*
+jenkins = Jenkins.instance
+
 pipeline {
 
     
@@ -65,7 +68,7 @@ pipeline {
                 }
             }
         }   
-        
+
 
         stage('Remove Unused docker image') {
             steps{
