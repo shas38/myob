@@ -52,7 +52,7 @@ pipeline {
         //     }
         // }
 
-        node {
+
             script {
                 def app
             }
@@ -81,7 +81,7 @@ pipeline {
                     sh "docker rmi $registry:$BUILD_NUMBER"
                 }
             }
-        }
+        
 
     }
 }
