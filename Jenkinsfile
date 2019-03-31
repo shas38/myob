@@ -1,5 +1,4 @@
-import jenkins.model.*
-jenkins = Jenkins.instance
+
 
 pipeline {
 
@@ -62,6 +61,8 @@ pipeline {
         stage('Deploy Docker Image') {
             steps{
                 script {
+                    import jenkins.model.*
+                    jenkins = Jenkins.instance
                     docker.withRegistry( 'https://hub.docker.com', 'dockerHubCredentials' ) {
                         dockerImage.push("latest")
                     }
