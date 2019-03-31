@@ -1,7 +1,7 @@
 pipeline {
-    script {
-        def app
-    }
+
+    def app
+    
     environment {
         registry = "shahriar27/myob"
         registryCredential = "dockerHubCredentials"
