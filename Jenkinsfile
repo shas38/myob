@@ -1,5 +1,3 @@
-
-
 pipeline {
 
     
@@ -28,34 +26,10 @@ pipeline {
         } 
 
 
-
-        
-            
-        // stage('Build image') {
-        //     /* This builds the actual image; synonymous to
-        //     * docker build on the command line */
-        //     app = docker.build("shahriar27/myob")
-        // }
-        // stage('Push image') {
-        //     /* Finally, we'll push the image with two tags:
-        //     * First, the incremental build number from Jenkins
-        //     * Second, the 'latest' tag.
-        //     * Pushing multiple tags is cheap, as all the layers are reused. */
-        //     docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
-        //         app.push("${env.BUILD_NUMBER}")
-        //         app.push("latest")
-        //     }
-        // }
-        
-        
-
         stage('Build Docker Image') {
             steps {
-                // sh 'docker build -t shk/myob .'
                 script {
-                    // docker.build registry + ":$BUILD_NUMBER"
                     dockerImage = docker.build("$registry:$BUILD_NUMBER")
-
                 }
             }
         } 
@@ -65,6 +39,7 @@ pipeline {
                 script {
                     docker.withRegistry( '', 'dockerHubCredentials' ) {
                         dockerImage.push("${env.BUILD_NUMBER}")
+                        dockerImage.push("latest")
                     }
                 }
             }
