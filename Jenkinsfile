@@ -55,7 +55,9 @@ pipeline {
                 script {
                     // docker.build registry + ":$BUILD_NUMBER"
                     def customImage = docker.build("$registry:$BUILD_NUMBER")
-                    customImage.push()
+                    docker.withRegistry( '', 'dockerHubCredentials' ) {
+                        customImage.push('latest')
+                    }
                 }
             }
         } 
