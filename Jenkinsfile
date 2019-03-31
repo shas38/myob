@@ -37,7 +37,7 @@ pipeline {
             }
         } 
         // Push docker image to docker hub
-        stage('Deploy Docker Image') {
+        stage('Push Docker Image') {
             steps{
                 script {
                     docker.withRegistry( '', 'dockerHubCredentials' ) { // Use system credentials to log in to docker hub
