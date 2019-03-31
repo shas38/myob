@@ -11,7 +11,7 @@ COPY package*.json ./
 
 # Building code for production
 RUN npm install
-# Run the below for production environment when a package-lock.json is available
+# Run the below for production environment when a package-lock.json is available 
 # RUN npm ci --only=production
 
 # Copy source code inside the Docker image
