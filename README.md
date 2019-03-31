@@ -1,9 +1,10 @@
 # myob web app
-This project contains a simple web server with three endpoints. The purpose of this project is to demonstrate how a CI/CD pipeline can be implemented. 
+This project contains a simple web server with three endpoints. The purpose of this project is to demonstrate how a CI/CD pipeline can be implemented. The pipeline is written in Groovy and can be used in Jenkins to automate the CI/CD process. Please see the jenkinsfile for the groovy script.
 
-- a simple root endpoint which responds in a simple manner; "hello world" or some such
-- a health endpoint which returns an appropriate response code
-- a metadata endpoint which returns basic information about your application; example:
+The API endpoints for the webapp are,
+- a simple root endpoint which responds with "hello world"
+- a health endpoint which returns {status: 200}
+- a metadata endpoint which returns basic information about your application; example below,
 
 ```json
 "myapplication": [
@@ -34,3 +35,8 @@ The pipeline can be seen in the image below.
 3. The the unit tests by typing "npm test".
 4. The the app by typing "npm start".
 5. The app will run on port 3000
+
+## How to pull the docker image
+1. Make sure docker is installed on your machine.
+2. To pull the docker image run "docker pull shahriar27/myob:latest"
+3. To run the docker container in the background type "docker run -p 3000:3000 -d shahriar27/myob"
