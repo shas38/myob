@@ -23,13 +23,6 @@ pipeline {
             steps {
                 sh 'docker build -t shk/myob .'
             }
-        }  
-
-        stage('Build Docker Image') {
-            steps {
-                sh 'docker run -p 4000:3000 -d shk/myob'
-                sh 'curl http://localhost:4000/health'    
-            }
         }   
 
     }
