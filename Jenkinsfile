@@ -1,7 +1,7 @@
 pipeline {
   agent any
     
-    
+node {
   stages {
         
     stage('Cloning Git') {
@@ -30,15 +30,8 @@ pipeline {
 
     stage('Test Docker Image') {
       steps {
-          sh 'docker run -p 4000:3000 -d shk/myob'
-        try {
-          sh 'curl -i http://localhost:4000/health'
-        } catch (err) {
-          echo "err"
-          sh 'docker stop shk/myob'
-          throw
-        }
-         
+        sh 'docker run -p 4000:3000 -d shk/myob'
+        sh 'curl http://localhost:4000/health'      
         sh 'docker stop shk/myob'
       }
     } 
