@@ -27,13 +27,12 @@ node {
          sh 'docker build -t shk/myob .'
       }
     }    
-
-    stage('Test Docker Image') {
+    stage('Build Docker Image') {
       steps {
-          sh 'docker run -p 4000:3000 -d shk/myob'
-          sh 'curl http://localhost:4000/health'      
+         sh 'docker run -p 4000:3000 -d shk/myob'
+         sh 'curl http://localhost:4000/health'    
       }
-    } 
+    }   
 
   }
 }
