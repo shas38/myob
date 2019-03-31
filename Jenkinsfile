@@ -1,3 +1,4 @@
+// Jenkins CI/CD pipeline written in Groovy 
 pipeline {
 
     // Declare environment variable for later use
