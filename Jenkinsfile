@@ -43,7 +43,7 @@ pipeline {
                 script {
                     docker.withRegistry( '', 'dockerHubCredentials' ) { // Use system credentials to log in to docker hub
                         dockerImage.push("${env.BUILD_NUMBER}") // create a new tag with jenkins build number 
-                        dockerImage.push("latest") // override the latest tag with the new build
+                        dockerImage.push("stable") // override the latest tag with the new build
                     }
                 }
             }
