@@ -34,11 +34,12 @@ pipeline {
         try {
           sh 'curl -i http://localhost:4000/health'
         } catch (err) {
-          echo err
+          echo "err"
           sh 'docker stop shk/myob'
+          throw
         }
          
-          sh 'docker stop shk/myob'
+        sh 'docker stop shk/myob'
       }
     } 
 
