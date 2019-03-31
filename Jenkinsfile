@@ -31,11 +31,7 @@ pipeline {
     stage('Test Docker Image') {
       steps {
          sh 'docker run -p 4000:3000 -d shk/myob'
-      }
-      steps {
          sh 'curl -i localhost:4000/health'
-      }
-      steps {
          sh 'docker stop shk/myob'
       }
     } 
