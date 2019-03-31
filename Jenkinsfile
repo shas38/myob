@@ -28,7 +28,7 @@ pipeline {
         stage('Test Docker Image') {
             steps {
                 sh 'docker run -p 4000:3000 -d shk/myob'
-                sh 'curl http://localhost:4000/health'    
+                sh 'curl http://157.230.165.25:4000/health'    
             }
         }  
 
