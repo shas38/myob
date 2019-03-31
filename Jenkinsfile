@@ -53,27 +53,29 @@ pipeline {
             steps {
                 // sh 'docker build -t shk/myob .'
                 script {
-                    docker.build registry + ":$BUILD_NUMBER"
+                    // docker.build registry + ":$BUILD_NUMBER"
+                    def customImage = docker.build("$registry:$BUILD_NUMBER")
+
                 }
             }
         } 
 
-        stage('Deploy Docker Image') {
-            steps{
-                script {
-                    docker.withRegistry( 'https://hub.docker.com', 'dockerHubCredentials' ) {
-                        dockerImage.push("latest")
-                    }
-                }
-            }
-        }   
+        // stage('Deploy Docker Image') {
+        //     steps{
+        //         script {
+        //             docker.withRegistry( 'https://hub.docker.com', 'dockerHubCredentials' ) {
+        //                 dockerImage.push("latest")
+        //             }
+        //         }
+        //     }
+        // }   
 
 
-        stage('Remove Unused docker image') {
-            steps{
-                sh "docker rmi $registry:$BUILD_NUMBER"
-            }
-        }
+        // stage('Remove Unused docker image') {
+        //     steps{
+        //         sh "docker rmi $registry:$BUILD_NUMBER"
+        //     }
+        // }
 
     }
 }
