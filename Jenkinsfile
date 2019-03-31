@@ -30,7 +30,23 @@ pipeline {
                     docker.build registry + ":$BUILD_NUMBER"
                 }
             }
-        }   
+        } 
+
+        stage('Deploy Docker Image') {
+            steps{
+                script {
+                docker.withRegistry( '', registryCredential ) {
+                    dockerImage.push()
+                }
+                }
+            }
+        }  
+
+        stage('Remove Unused docker image') {
+            steps{
+                sh "docker rmi $registry:$BUILD_NUMBER"
+            }
+        }
 
         // stage('Test Docker Image') {
         //     steps {
