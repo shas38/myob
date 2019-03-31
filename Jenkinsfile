@@ -54,7 +54,7 @@ pipeline {
                 // sh 'docker build -t shk/myob .'
                 script {
                     // docker.build registry + ":$BUILD_NUMBER"
-                    def customImage = docker.build("$registry:$BUILD_NUMBER")
+                    dockerImage = docker.build("$registry:$BUILD_NUMBER")
 
                 }
             }
@@ -64,18 +64,18 @@ pipeline {
             steps{
                 script {
                     docker.withRegistry( '', 'dockerHubCredentials' ) {
-                        customImage.push("${env.BUILD_NUMBER}")
+                        dockerImage.push("${env.BUILD_NUMBER}")
                     }
                 }
             }
         }   
 
 
-        // stage('Remove Unused docker image') {
-        //     steps{
-        //         sh "docker rmi $registry:$BUILD_NUMBER"
-        //     }
-        // }
+        stage('Remove Unused docker image') {
+            steps{
+                sh "docker rmi $registry:$BUILD_NUMBER"
+            }
+        }
 
     }
 }
