@@ -16,7 +16,7 @@ pipeline {
       }
     }
      
-    stage('Test') {
+    stage('Unit Test') {
       steps {
          sh 'npm test'
       }
@@ -26,6 +26,25 @@ pipeline {
       steps {
          sh 'docker build -t shk/myob .'
       }
-    }     
+    }    
+
+    stage('Test Docker Image') {
+      steps {
+         sh 'docker run -p 4000:3000 -d shk/myob'
+      }
+      steps {
+         sh 'curl -i localhost:4000/health'
+      }
+      steps {
+         sh 'docker stop shk/myob'
+      }
+    } 
+
+    // stage('Build Docker Image') {
+    //   steps {
+    //      sh 'docker build -t shk/myob .'
+    //   }
+    // } 
+
   }
 }
