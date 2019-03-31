@@ -26,7 +26,9 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 // sh 'docker build -t shk/myob .'
-                docker.build registry + ":$BUILD_NUMBER"
+                script {
+                    docker.build registry + ":$BUILD_NUMBER"
+                }
             }
         }   
 
