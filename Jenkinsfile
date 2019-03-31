@@ -6,7 +6,11 @@ pipeline {
         registryCredential = "dockerHubCredentials"
     }
     agent any
+    script {
+            def app
+        }
     stages {
+                 
         stage('Cloning Git') {
             steps {
                 git 'https://github.com/shas38/myob.git'
@@ -53,9 +57,7 @@ pipeline {
         // }
 
 
-            script {
-                def app
-            }
+ 
             stage('Build Docker Image') {
                 steps {
                     script {
