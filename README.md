@@ -1,4 +1,4 @@
-# myob web app
+# CI/CD Using Jenkins
 This project contains a simple web server with three endpoints. The purpose of this project is to demonstrate how a CI/CD pipeline can be implemented. The pipeline is written in Groovy and can be used in Jenkins to automate the CI/CD process. Please see the jenkinsfile for the groovy script.
 
 The API endpoints for the webapp are,
